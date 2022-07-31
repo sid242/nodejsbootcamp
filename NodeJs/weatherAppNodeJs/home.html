@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+        integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather App</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .box {
+        margin: auto;
+        text-align: center;
+        background-color: rgb(220 191 220);
+        width: 300px;
+        height: 400px;
+        box-shadow: 8px 9px 9px 8px rgba(0, 0, 0, 0.3);
+        margin-top: 100px;
+    }
+
+    .fa-sun {
+        font-size: 4rem;
+        margin: 40px;
+        animation: sun 3s linear infinite;
+    }
+
+    @keyframes sun {
+        to {
+            transform: scale(1.2);
+        }
+
+        from {
+            transform: scale(2);
+        }
+    }
+
+    .fa-street-view{
+        animation: street 2s linear infinite alternate;
+    }
+    @keyframes street {
+        to {
+            transform: translateX(-0.5rem);
+        }
+
+        from {
+            transform: translateX(0.5rem);
+        }
+    }
+
+    .info {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #date {
+        margin: 10px;
+    }
+
+    .location {
+        margin: 10px;
+    }
+
+    .tempmin_max {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <div id="weathercon">
+            <i class="fas fa-sun" style="color:#eccc68"></i>
+        </div>
+        <div class="info">
+            <h2 class="location"><i class="fas fa-street-view"></i> {%location%}, {%country%}</h2>
+            <p id="date">WED | OCT 23 | 10:49AM</p>
+            <h1 class="temp">{%tempval%}</h1>
+            <h3 class="tempmin_max">Min {%tempmin%} | Max {%tempmax%}</h3>
+        </div>
+    </div>
+
+    <script>
+
+        const curDate = document.getElementById("date");
+        let weathercon = document.getElementById("weathercon");
+
+        const tempStatus = "Clouds";
+
+        const getCurrentDay = () => {
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            let currentTime = new Date();
+            let day = weekday[currentTime.getDay()];
+            return day;
+        }
+
+        // getCurrentDay();
+
+        const getCurrentTime = () => {
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            var now = new Date();
+            var month = months[now.getMonth()];
+            var day = now.getDate();
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+            let periods = "AM";
+
+            if (hours > 12) {
+                periods = "PM";
+
+                if (hours > 12) hours -= 12;
+                
+            }
+            else if(hours==0) hours = 12;
+
+
+            if (mins < 10) {
+                mins = "0" + mins;
+            }
+
+            return ` ${month} ${day} | ${hours}:${mins} ${periods}`;
+        }
+
+        curDate.innerHTML = getCurrentDay() + " |" + getCurrentTime();
+        // getCurrentTime();
+    </script>
+</body>
+
+</html>

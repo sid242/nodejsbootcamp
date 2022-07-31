@@ -1,0 +1,19 @@
+[
+    {
+        "name":"Siddharth",
+        "age":21,
+        "learning":"nodejs"
+    },
+    {
+        "name":"Jigar",
+        "age":20,
+        "learning":"Java"
+    },
+    {
+        "name":"Haresh",
+        "age":21,
+        "learning":"Python"
+    }
+]
+
+
